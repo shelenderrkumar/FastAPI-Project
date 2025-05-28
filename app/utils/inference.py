@@ -1,18 +1,19 @@
 import torch
-import sentencepiece
+# import sentencepiece # Removed as it's not directly needed for RoBERTa
 
-from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipeline
+from transformers import AutoModelForSequenceClassification, AutoTokenizer # Removed pipeline
 from app.utils.preprocess import preprocess_tweet
 
 
-# This is the path to directory where fine-tuned model is saved
-model_path = "E:\\Shelender Kumar-Solved Assignment\\models"
+# This is the path to the Hugging Face model hub
+model_path = "cardiffnlp/twitter-roberta-base-sentiment-latest"
 
 model = AutoModelForSequenceClassification.from_pretrained(model_path)
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 
 
 # A mapping is defined from sentiment labels to human-readable names
+# Verified this mapping against the model card: 0 -> Negative; 1 -> Neutral; 2 -> Positive
 SENTIMENT_LABELS = {0: "Negative", 1: "Neutral", 2: "Positive"}
 
 
